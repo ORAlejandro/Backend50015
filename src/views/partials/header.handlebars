@@ -1,31 +1,14 @@
-<!-- 
 <header>
-    <div>
-        <img src=""
-            alt="Logo de la tienda">
-        <button type="button">
-            <span></span>
-        </button>
-        <nav id="navbarNav">
-            <ul>
-                <li>
-                    <a href="/login">Iniciar Sesion</a>
-                </li>
-                <li>
-                    <a href="/register">Registrate</a>
-                </li>
-                <li>
-                    <a href="/api/users/profile">Perfil</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
--->
-
-<header>
-    <h1>Title</h1>
-    <div>
-        <p>Header en progreso</p>
+    <h1>TodoRopa</h1>
+    <div class="headerCondicionales">
+        <form action="/login">
+            <button class="headerBtn" type="submit">Iniciar Sesion</button>
+        </form>
+        <form action="/register">
+            <button class="headerBtn" type="submit">Registrate</button>
+        </form>
+        <form action="/api/users/logout" method="POST">
+            <button class="headerBtn" type="submit">Logout</button>
+        </form>
     </div>
 </header>

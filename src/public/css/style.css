@@ -1,0 +1,345 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+/*///////// LOGIN /////////*/
+
+.loginMain {
+  margin: 1.5rem auto;
+  max-width: 30%;
+}
+
+.loginh2 {
+  color: #4f23d1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.loginSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  -moz-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+}
+
+.loginEmail {
+  margin-bottom: 1.2rem;
+}
+
+.loginEmail label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.loginEmail input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.loginPassword {
+  margin-bottom: 2rem;
+}
+
+.loginPassword label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.loginPassword input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.loginBtn {
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 0.4rem 2.7rem;
+}
+
+.loginDivBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginNotAccount {
+  margin-bottom: 1.5rem;
+}
+
+.loginRegister {
+  font-weight: 500;
+  text-decoration: none;
+  color: #4f23d1;
+}
+
+/*///////// REGISTER /////////*/
+
+.registerMain {
+  margin: 1.5rem auto;
+  max-width: 30%;
+}
+
+.registerSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  -moz-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+}
+
+.registerh2 {
+  color: #4f23d1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.registerNombre {
+  margin-bottom: 1.2rem;
+}
+
+.registerApellido {
+  margin-bottom: 1.2rem;
+}
+
+.registerEmail {
+  margin-bottom: 1.2rem;
+}
+
+.registerPassword {
+  margin-bottom: 1.2rem;
+}
+
+.registerEdad {
+  margin-bottom: 2rem;
+}
+
+.registerNombre label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.registerApellido label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.registerEmail label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.registerPassword label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.registerEdad label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.6rem;
+}
+
+.registerNombre input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.registerApellido input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.registerEmail input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.registerPassword input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.registerEdad input {
+  font-size: 0.8rem;
+  padding: 0.2rem 1.7rem;
+}
+
+.registerBtnDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerBtn {
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 0.4rem 2.7rem;
+}
+
+.registerNotAccount {
+  margin-bottom: 1.5rem;
+}
+
+.registerLogin {
+  font-weight: 500;
+  text-decoration: none;
+  color: #4f23d1;
+}
+
+/*///////// PROFILE /////////*/
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  -moz-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+}
+
+.profileh2 {
+  color: #4f23d1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.profileSpanRol {
+  text-transform: capitalize;
+}
+
+.profileP {
+  margin-bottom: 0.7rem;
+}
+
+.profileLogout {
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 2.7rem;
+}
+
+.profileA {
+  font-weight: 500;
+  text-decoration: none;
+  color: #4f23d1;
+}
+
+.profileFullName {
+  font-weight: 500;
+  color: rgb(254, 144, 101);
+}
+
+.profileMain {
+  margin: 1.5rem auto;
+  max-width: 40%;
+}
+
+.profileFondo {
+  margin-bottom: 1.5rem;
+}
+
+/*///////// PRODUCTS /////////*/
+
+.productsAgregar {
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 2.7rem;
+}
+
+.productsFlexSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.productsFlexCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem 1.5rem;
+}
+
+.productsh2 {
+  color: #4f23d1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.productsFlexP {
+  margin-bottom: 0.2rem;
+}
+
+.productsh3Title {
+  margin-bottom: 2rem;
+}
+
+.productsFlexPages {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.productsA {
+  font-weight: 500;
+  text-decoration: none;
+  color: #4f23d1;
+}
+
+/*///////// HEADERS /////////*/
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+}
+
+.headerCondicionales {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.headerBtn {
+  cursor: pointer;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  padding: 0.3rem 1rem;
+}

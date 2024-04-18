@@ -1,19 +1,31 @@
-<h1>Registrarse</h1>
-<form class="formulario" action="/api/users/register" method="post">
-    <label for="first_name">Nombre:</label>
-    <input type="text" class="inputMessi" id="first_name" name="first_name" required>
-    
-    <label for="last_name">Apellido:</label>
-    <input type="text" class="inputMessi" id="last_name" name="last_name" required>
-    
-    <label for="email">Email:</label>
-    <input type="email" class="inputMessi" id="email" name="email" required>
-    
-    <label for="password">Contraseña:</label>
-    <input type="password" class="inputMessi" id="password" name="password" required>
-    
-    <label for="age">Edad:</label>
-    <input type="number" class="inputMessi" id="age" name="age" required>
-    
-    <button class="btnMios" type="submit">Register</button>
-</form>
+<main class="registerMain">
+    <section class="registerSection">
+        <h2 class="registerh2">Registro</h2>
+        <form action="/api/users/register" method="post">
+            <div class="registerNombre">
+                <label for="first_name">Nombre</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div class="registerApellido">
+                <label for="last_name">Apellido</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+            <div class="registerEmail">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="registerPassword">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="registerEdad">
+                <label for="age">Edad</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="registerBtnDiv">
+                <button class="registerBtn" type="submit">Register</button>
+            </div>
+        </form>
+        <p class="registerNotAccount">¿Ya tenes cuenta? <a class="registerLogin" href="/login">Inicia Sesion</a></p>
+    </section>
+</main>

@@ -1,79 +1,18 @@
-{{!-- <h1>Mi Perfil</h1>
-<p>Bienvenido!, {{user.nombre}} {{user.apellido}}!</p>
-<p>Role: {{user.role}} </p>
+<main class="profileMain">
+  <section class="profileSection">
+    <h2 class="profileh2">Perfil</h2>
+    <p class="profileP">Bienvenido, <span class="profileFullName">{{user.nombre}} {{user.apellido}}!</span></p>
+    <p class="profileP">Rol: <span class="profileSpanRol">{{user.role}}</span></p>
 
-<form action="/api/users/logout" method="POST">
-  <button class="btnMios" type="submit">Logout</button>
-</form>
+    {{#if this.isAdmin}}
+    <p class="profileP">Acceso al <a class="profileA" href="/realtimeproducts">Modificador de Productos</a></p>
+    {{else}}
+    <p class="profileP">Ir a ver la <a class="profileA" href="/products">Tienda</a></p>
+    <p class="profileP">¡Accede a un <a class="profileA" href="/chat">Chat en vivo</a> exclusivo para clientes!</p>
+    {{/if}}
 
-{{#if this.isAdmin}}
-  <a href="/realtimeproducts"> Modificar Productos </a>
-{{else}}
-  <a href="/chat"> Chat en vivo</a>
-  <a href="/products"> Tienda </a>
-{{/if}} --}}
-
-{{!-- Con CSS --}}
-
-
-<style>
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .profile-card {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    text-align: center;
-  }
-
-  .profile-card p {
-    margin-bottom: 10px;
-  }
-
-  .profile-card .btnMios {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #c1101a;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .profile-card .btnMios:hover {
-    background-color: #ff1f33;
-  }
-
-  .profile-card a {
-    display: block;
-    margin-bottom: 10px;
-    color: #c1101a;
-    text-decoration: none;
-    font-weight: bold;
-  }
-</style>
-
-<h1>Mi Perfil</h1>
-
-<div class="profile-card">
-  <p>Bienvenido, {{user.nombre}} {{user.apellido}}!</p>
-  <p>Rol: {{user.role}}</p>
-
-  <form action="/api/users/logout" method="POST">
-    <button class="btnMios" type="submit">Logout</button>
-  </form>
-
-  {{#if this.isAdmin}}
-    <a class="btnMios" href="/realtimeproducts">Modificar Productos</a>
-  {{else}}
-    <a class="btnMios" href="/chat">Chat en vivo</a>
-    <a class="btnMios" href="/products">Tienda</a>
-  {{/if}}
-</div>
+    <form action="/api/users/logout" method="POST">
+      <button class="profileLogout" type="submit">Logout</button>
+    </form>
+  </section>
+</main>

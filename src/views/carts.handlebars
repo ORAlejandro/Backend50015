@@ -1,20 +1,26 @@
-<h1>Carrito de Compras</h1>
+<h2 class="cartsh2">Carrito de Compras</h2>
 
-<div>
+<section class="cartsSectionFlex">
     {{#each productos}}
     <div>
-        <div>
-            <h5>Producto: {{this.product.title}}</h5>
-            <p>Cantidad: {{this.quantity}}</p>
-            <p>Precio: ${{this.product.totalPrice}}</p>
-            <button onclick="eliminarProducto('{{this.cartId}}', '{{this.product._id}}')">Eliminar</button>
+        <div class="cartsFlexCard">
+            <h3 class="cartsh3Card">{{this.product.title}}</h3>
+            <p class="cartspQuantity">Cantidad: {{this.quantity}}</p>
+            <p>${{this.product.totalPrice}}</p>
+            <button class="cartsBtnEliminar"
+                onclick="eliminarProducto('{{this.cartId}}', '{{this.product._id}}')">Eliminar</button>
         </div>
     </div>
     {{/each}}
-</div>
+    <h4 class="cartsh4Total">Monto Total: ${{totalCompra}}</h4>
+    <p class="cartsAgregarMas">¿Te falto agregar algo? <a class="cartsVolverTienda" href="/products">Volver a la
+            Tienda</a></p>
+    <div>
+        <button class="cartsBtnEliminar" onclick="vaciarCarrito('{{cartId}}')">Vaciar Carrito</button>
+        <button class="cartsFinalizar">Finalizar Compra</button>
+    </div>
+</section>
 
-<button onclick="vaciarCarrito('{{cartId}}')">Vaciar Carrito</button>
-<h3>Total de la compra: ${{totalCompra}}</h3>
 
 {{!-- Organizar en un módulo en PUBLIC/JS --}}
 <script>

@@ -343,3 +343,128 @@ header {
   margin-right: 0.3rem;
   padding: 0.3rem 1rem;
 }
+
+/*///////// CARTS /////////*/
+
+.cartsh2 {
+  color: #4f23d1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.cartsSectionFlex {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cartsFlexCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.cartsBtnEliminar {
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  margin-bottom: 1rem;
+  padding: 0.2rem 1.7rem;
+  background-color: rgb(255, 17, 17);
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+.cartsBtnEliminar:hover {
+  background-color: rgb(255, 42, 42);
+}
+
+.cartsh3Card {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.cartspQuantity {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.cartsh4Total {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.cartsAgregarMas {
+  margin-bottom: 0.3rem;
+}
+
+.cartsVolverTienda {
+  font-weight: 500;
+  text-decoration: none;
+  color: #4f23d1;
+}
+
+.cartsFinalizar {
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  margin-bottom: 1rem;
+  padding: 0.2rem 1.7rem;
+  background-color: rgb(7, 148, 5);
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+.cartsFinalizar:hover {
+  background-color: rgb(24, 179, 21);
+}
+
+/*///////// REALTIMEPRODUCTS /////////*/
+
+.realh2 {
+  color: #4f23d1;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.realCards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.realCardsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.realFormFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+.realSection {
+  margin: 1.5rem auto;
+  max-width: 25%;
+}
+
+.realInputs {
+  font-size: 0.8rem;
+  padding: 0.4rem 1.7rem;
+  margin-bottom: 0.7rem;
+}

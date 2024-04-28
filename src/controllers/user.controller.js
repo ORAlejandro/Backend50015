@@ -69,7 +69,8 @@ class UserController {
 
             res.redirect("/api/users/profile");
         } catch (error) {
-            console.error(error);
+            req.logger.error("Critial error from catch login controller")
+            //console.error(error);
             res.status(500).send("Error interno del servidor");
         }
     }

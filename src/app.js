@@ -7,6 +7,7 @@ const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require('path');
 const PUERTO = 8080;
+const addLogger = require("./utils/logger.js");
 require("./database.js");
 
 const productsRouter = require("./routes/products.router.js");
@@ -21,6 +22,7 @@ app.use(express.json());
 //app.use(express.static("./src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use(addLogger);
 
 //Passport 
 app.use(passport.initialize());
@@ -43,6 +45,14 @@ app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
 app.use("/", viewsRouter);
 app.use("/mockingproducts", fakerRouter);
+//Ruta para desafio:
+app.get("/loggertest", (req, res) => {
+    req.logger.error("Critical error");
+    req.logger.warning("Warning!");
+    req.logger.info("Informacion mediante logger");
+    req.logger.debug("Mensaje debug");
+    res.send("Ruta para testear Winston");
+})
 
 const httpServer = app.listen(PUERTO, () => {
     console.log(`Servidor escuchando en el puerto ${PUERTO}`);

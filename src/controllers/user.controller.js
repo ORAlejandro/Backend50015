@@ -49,6 +49,28 @@ class UserController {
         try {
             const usuarioEncontrado = await UserModel.findOne({ email });
 
+            const admin = {
+                first_name: "Coder",
+                last_name: "House",
+                age: 1,
+                email: "adminCoder@coder.com",
+                password: "adminCod3r123",
+                role: "admin"
+            }
+
+            if(email == admin.email && password == admin.password) {
+                const token = jwt.sign({ user: admin }, "coderhouse", {
+                    expiresIn: "1h"
+                });
+    
+                res.cookie("coderCookieToken", token, {
+                    maxAge: 3600000,
+                    httpOnly: true
+                });
+
+                return res.redirect("/api/users/profile");
+            }
+
             if (!usuarioEncontrado) {
                 return res.status(401).send("Usuario no válido");
             }

@@ -17,7 +17,7 @@ const checkUserRole = (allowedRoles) => (req, res, next) => {
             }
         });
     } else {
-        res.status(403).send('Acceso denegado. Token no proporcionado.');
+        res.redirect("/login");
     }
 };
 

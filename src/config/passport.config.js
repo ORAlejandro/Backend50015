@@ -6,16 +6,16 @@ const UserModel = require("../models/user.model.js");
 
 const initializePassport = () => {
     passport.use("jwt", new JWTStrategy({
-        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]), // Utiliza ExtractJwt.fromExtractors para extraer el token de la cookie
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
         secretOrKey: "coderhouse"
     }, async (jwt_payload, done) => {
         try {
-            // Busca el usuario en la base de datos usando el ID del payload JWT
+            // Busca el usuario en la base de datos usando el ID del payload JWT (Anotacion del profe)
             const user = await UserModel.findById(jwt_payload.user._id);
             if (!user) {
                 return done(null, false);
             }
-            return done(null, user); // Devuelve el usuario encontrado
+            return done(null, user);
         } catch (error) {
             return done(error);
         }

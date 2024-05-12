@@ -38,7 +38,6 @@ app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
-
 //Rutas: 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
@@ -55,7 +54,7 @@ app.get("/loggertest", (req, res) => {
 })
 
 const httpServer = app.listen(PUERTO, () => {
-    console.log(`Servidor escuchando en el puerto ${PUERTO}`);
+    console.log(`Success: Servidor escuchando en http://localhost:${PUERTO}`);
 });
 
 ///Websockets: 

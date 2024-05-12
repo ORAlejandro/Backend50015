@@ -3,6 +3,9 @@ const CartModel = require("../models/cart.model.js");
 const jwt = require("jsonwebtoken");
 const { createHash, isValidPassword } = require("../utils/hashbcryp.js");
 const UserDTO = require("../dto/user.dto.js");
+const generateRandomResetToken = require("../utils/tokenreset.js");
+const EmailManager = require("../services/nodemailer.js");
+const emailManager = new EmailManager;
 
 class UserController {
     async register(req, res) {
@@ -49,6 +52,7 @@ class UserController {
         try {
             const usuarioEncontrado = await UserModel.findOne({ email });
 
+            /*
             const admin = {
                 first_name: "Coder",
                 last_name: "House",
@@ -70,7 +74,7 @@ class UserController {
 
                 return res.redirect("/api/users/profile");
             }
-
+            */
             if (!usuarioEncontrado) {
                 return res.status(401).send("Usuario no válido");
             }
@@ -114,6 +118,71 @@ class UserController {
             return res.status(403).send("Acceso denegado");
         }
         res.render("admin");
+    }
+
+    async requestPasswordReset(req, res) {
+        const {email} = req.body;
+        try {
+            //Busco el email en la db
+            const user = await UserModel.findOne({email});
+            //Valido si existe
+            if (!user) {
+                return res.status(404).send("No existe miembro con ese email");
+            }
+            //Aca genero el token random
+            const token = generateRandomResetToken();
+            //Guardo el nuevo token en el usuario
+            user.resetToken = {
+                token: token,
+                expiresAt: new Date(Date.now() + 3600000)
+            };
+            //Guardo en la db
+            await user.save();
+            //Envio el mail
+            await emailManager.sendRestorePasswordMail(email, user.first_name, token);
+
+            res.redirect("/confirmacion-envio");
+        } catch (error) {
+            console.error("Error: ", error);
+            res.status(500).send("Internal Server Error");
+        }
+    }
+
+    async resetPassword(req, res) {
+        const {email, password, token} = req.body;
+        try {
+            //Busco el usuario
+            const user = await UserModel.findOne({ email });
+            //Valido que no exista
+            if (!user) {
+                return res.render("generatenewpassword", {error: "El email no coincide con ningun usuario"});
+            }
+            //Valido el token de reestablecimiento
+            const resetToken = user.resetToken;
+            if (!resetToken || resetToken.token !== token) {
+                return res.render("resetpassword", {error: "El token de restablecimiento de contraseña es inválido"});
+            }
+            //Valido que el token no haya expirado
+            const currently = new Date();
+            if (currently > resetToken.expiresAt) {
+                return res.redirect("/generatenewpassword");
+            }
+            //Valido que no quiera reestablecer la pw con la actual
+            if (isValidPassword(password, user)) {
+                return res.render("generatenewpassword", { error: "La nueva contraseña no puede ser igual a la anterior" });
+            }
+
+            //Actualizo la pw
+            user.password = createHash(password);
+            //Dejo useless el token
+            user.resetToken = undefined;
+            await user.save();
+            
+            return res.redirect("/login");
+        } catch (error) {
+            console.error(error);
+            return res.status(500).render("passwordreset", { error: "Error interno del servidor" });
+        }
     }
 }
 

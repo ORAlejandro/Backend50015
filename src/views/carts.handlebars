@@ -17,7 +17,9 @@
             Tienda</a></p>
     <div>
         <button class="cartsBtnEliminar" onclick="vaciarCarrito('{{cartId}}')">Vaciar Carrito</button>
-        <button class="cartsFinalizar">Finalizar Compra</button>
+        <form method="post" action="/api/carts/{{cartId}}/purchase">
+            <button type="submit" class="cartsFinalizar">Finalizar Compra</button>
+        </form>
     </div>
 </section>
 

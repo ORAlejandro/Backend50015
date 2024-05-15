@@ -1,14 +1,28 @@
 <header>
     <h1>TodoRopa</h1>
+    {{#if isAuthenticated}}
+
     <div class="headerCondicionales">
-        <form action="/login">
-            <button class="headerBtn" type="submit">Iniciar Sesion</button>
+        <form action="/api/users/profile" method="POST">
+            <button class="headerBtn" type="submit">Perfil</button>
         </form>
-        <form action="/register">
-            <button class="headerBtn" type="submit">Registrate</button>
-        </form>
+
         <form action="/api/users/logout" method="POST">
             <button class="headerBtn" type="submit">Logout</button>
         </form>
     </div>
+
+    {{else}}
+
+    <div class="headerCondicionales">
+        <form action="/login">
+            <button class="headerBtn" type="submit">Iniciar Sesion</button>
+        </form>
+
+        <form action="/register">
+            <button class="headerBtn" type="submit">Registrate</button>
+        </form>   
+    </div>
+    
+    {{/if}}
 </header>

@@ -184,6 +184,27 @@ class UserController {
             return res.status(500).render("passwordreset", { error: "Error interno del servidor" });
         }
     }
+
+    async switchRolePremium(req, res) {
+        try {
+            //Tomo el ID del usuario
+            const {uid} = req.params;
+            //Lo busco en la db
+            const user = await UserModel.findById(uid);
+            //Corroboro que exista
+            if(!user) {
+                return res.status(404).json({ status: "failed", message: "Usuario inexistente" });
+            }
+            //Guardo en una variable el nuevo valor
+            const newRole = user.role === "usuario" ? "premium" : "usuario";
+            //Implemento el nuevo valor al perfil del usuario
+            const updated = await UserModel.findByIdAndUpdate(uid, { role: newRole }, { new: true });
+            res.json(updated);
+        } catch (error) {
+            console.error("Error en el switch de roles: ", error);
+            res.status(500).json({ status: "failed", message: "Internal server error" });
+        }
+    }
 }
 
 module.exports = UserController;

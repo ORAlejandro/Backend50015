@@ -13,7 +13,7 @@ router.get("/admin", passport.authenticate("jwt", { session: false }), userContr
 
 router.post("/requestPasswordReset", userController.requestPasswordReset);
 router.post('/reset-password', userController.resetPassword);
-//router.put("/premium/:uid", userController.cambiarRolPremium);
+router.put("/premium/:uid", userController.switchRolePremium);
 
 module.exports = router;
 

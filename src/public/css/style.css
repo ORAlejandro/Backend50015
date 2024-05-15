@@ -468,3 +468,7 @@ header {
   padding: 0.4rem 1.7rem;
   margin-bottom: 0.7rem;
 }
+
+.restoreEmail {
+  text-align: center !important;
+}

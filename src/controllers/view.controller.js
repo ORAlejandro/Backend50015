@@ -112,15 +112,15 @@ class ViewsController {
     }
 
     async renderResetPassword(req, res) {
-        res.render("resetpassword");
+        res.render("passwordreset");
     }
 
     async renderCambioPassword(req, res) {
-        res.render("generatenewpassword");
+        res.render("passwordcambio");
     }
 
     async renderConfirmacion(req, res) {
-        res.render("sendmailsuccess");
+        res.render("confirmacion-envio");
     }
 
     async renderPremium(req, res) {

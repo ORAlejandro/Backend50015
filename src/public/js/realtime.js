@@ -1,11 +1,10 @@
-const socket = io(); 
+const socket = io();
+const role = document.getElementById("role").textContent;
+const email = document.getElementById("email").textContent;
 
 socket.on("productos", (data) => {
-    //console.log(data);
     renderProductos(data);
 })
-
-//Función para renderizar nuestros productos: 
 
 const renderProductos = (productos) => {
     const contenedorProductos = document.getElementById("contenedorProductos");
@@ -24,10 +23,19 @@ const renderProductos = (productos) => {
                         `;
 
         contenedorProductos.appendChild(card);
-        //Agregamos el evento al boton de eliminar: 
-        card.querySelector("button").addEventListener("click", ()=> {
-            eliminarProducto(item._id);
-        })
+        card.querySelector("button").addEventListener("click", () => {
+            if (role === "premium" && item.owner === email) {
+                eliminarProducto(item._id);
+            } else if (role === "admin") {
+                eliminarProducto(item._id);
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Acceso Denegado",
+                    text: "No es posible eliminar un producto que no te pertenece",
+                })
+            }
+        });
     })
 }
 
@@ -36,14 +44,16 @@ const eliminarProducto = (id) =>  {
     socket.emit("eliminarProducto", id);
 }
 
-//Agregamos productos del formulario: 
-
 document.getElementById("btnEnviar").addEventListener("click", () => {
     agregarProducto();
 })
 
-
 const agregarProducto = () => {
+    //Guardo en variables el role y el email
+    const role = document.getElementById("role").textContent;
+    const email = document.getElementById("email").textContent;
+    //Declaro si owner es premium o admin
+    const owner = role === "premium" ? email : "admin";
     const producto = {
         title: document.getElementById("title").value,
         description: document.getElementById("description").value,
@@ -53,6 +63,7 @@ const agregarProducto = () => {
         stock: document.getElementById("stock").value,
         category: document.getElementById("category").value,
         status: document.getElementById("status").value === "true",
+        owner
     };
 
     socket.emit("agregarProducto", producto);

@@ -1,17 +1,17 @@
 const ProductModel = require("../models/product.model.js");
 
 class ProductRepository {
-    async agregarProducto({ title, description, price, img, code, stock, category, thumbnails }) {
+    async agregarProducto({ title, description, price, img, code, stock, category, thumbnails, owner }) {
         try {
             if (!title || !description || !price || !code || !stock || !category) {
-                console.log("Todos los campos son obligatorios");
+                console.log("Se requieren todos los campos");
                 return;
             }
 
             const existeProducto = await ProductModel.findOne({ code: code });
 
             if (existeProducto) {
-                console.log("El código debe ser único, malditooo!!!");
+                console.log("El code le corresponde a otro producto");
                 return;
             }
 
@@ -24,7 +24,8 @@ class ProductRepository {
                 stock,
                 category,
                 status: true,
-                thumbnails: thumbnails || []
+                thumbnails: thumbnails || [],
+                owner
             });
 
             await newProduct.save();
@@ -32,7 +33,7 @@ class ProductRepository {
             return newProduct;
 
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al crear el producto");
         }
     }
 

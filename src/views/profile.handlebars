@@ -7,6 +7,9 @@
     {{#if this.isAdmin}}
     <p class="profileP">Acceso al <a class="profileA" href="/realtimeproducts">Modificador de Productos</a></p>
     {{else}}
+    {{#if this.isPremium}}
+    <a class="btnMios" href="/realtimeproducts">Panel Premium</a>
+    {{/if}}
     <p class="profileP">Ir a ver la <a class="profileA" href="/products">Tienda</a></p>
     <p class="profileP">¡Accede a un <a class="profileA" href="/chat">Chat en vivo</a> exclusivo para clientes!</p>
     {{/if}}

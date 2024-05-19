@@ -101,11 +101,24 @@ class UserController {
         }
     }
 
+    /*
     async profile(req, res) {
         //Con DTO: 
         const userDto = new UserDTO(req.user.first_name, req.user.last_name, req.user.role);
         const isAdmin = req.user.role === 'admin';
         res.render("profile", { user: userDto, isAdmin });
+    }
+    */
+
+    async profile(req, res) {
+        try {
+            const isPremium = req.user.role === "premium";
+            const userDto = new UserDTO(req.user.first_name, req.user.last_name, req.user.role);
+            const isAdmin = req.user.role === "admin";
+            res.render("profile", { user: userDto, isPremium, isAdmin });
+        } catch (error) {
+            res.status(500).send('Error interno del servidor');
+        }
     }
 
     async logout(req, res) {

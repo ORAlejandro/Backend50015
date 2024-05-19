@@ -10,7 +10,7 @@ router.get("/products", checkUserRole(['usuario']),passport.authenticate('jwt', 
 router.get("/carts/:cid", viewsController.renderCart);
 router.get("/login", viewsController.renderLogin);
 router.get("/register", viewsController.renderRegister);
-router.get("/realtimeproducts", checkUserRole(['admin']), viewsController.renderRealTimeProducts);
+router.get("/realtimeproducts", checkUserRole(["admin", "premium"]), viewsController.renderRealTimeProducts);
 router.get("/chat", checkUserRole(['usuario']) ,viewsController.renderChat);
 router.get("/", viewsController.renderHome);
 

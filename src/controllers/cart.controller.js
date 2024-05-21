@@ -107,7 +107,6 @@ class CartController {
         }
     }
 
-    //Ultima Pre Entrega: 
     async finalizarCompra(req, res) {
         const cartId = req.params.cid;
         try {
@@ -159,4 +158,3 @@ class CartController {
 }
 
 module.exports = CartController;
-

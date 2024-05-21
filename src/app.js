@@ -10,21 +10,21 @@ const PUERTO = 8080;
 const addLogger = require("./utils/logger.js");
 require("./database.js");
 
+//Importaciones de rutas
 const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
 const fakerRouter = require("./routes/faker.router.js");
 
-//Middleware
+//Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//app.use(express.static("./src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(addLogger);
 
-//Passport 
+//Passport
 app.use(passport.initialize());
 initializePassport();
 app.use(cookieParser());
@@ -38,13 +38,14 @@ app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
-//Rutas: 
+//Rutas
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
 app.use("/", viewsRouter);
 app.use("/mockingproducts", fakerRouter);
-//Ruta para desafio:
+
+//Ruta para desafio
 app.get("/loggertest", (req, res) => {
     req.logger.error("Critical error");
     req.logger.warning("Warning!");
@@ -57,7 +58,6 @@ const httpServer = app.listen(PUERTO, () => {
     console.log(`Success: Servidor escuchando en http://localhost:${PUERTO}`);
 });
 
-///Websockets: 
+///Websockets
 const SocketManager = require("./sockets/socketmanager.js");
 new SocketManager(httpServer);
-

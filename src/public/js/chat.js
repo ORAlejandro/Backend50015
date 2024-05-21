@@ -2,17 +2,12 @@ const socket = io();
 let user; 
 const chatBox = document.getElementById("chatBox");
 
-//Sweet Alert 2: es una librería que nos permite crear alertas personalizadas. 
-
-//Swal es un objeto global que nos permite usar los métodos de la libreria.  
-//Fire es un método que nos permite configurar el alerta.
-
 Swal.fire({
     title: "Identificate", 
     input: "text",
-    text: "Ingresa un usuario para identificarte en el chat", 
+    text: "Como te llamaremos en el chat?", 
     inputValidator: (value) => {
-        return !value && "Necesitas escribir un nombre para continuar"
+        return !value && "Para ingresar al chat es obligatorio tener un nombre"
     }, 
     allowOutsideClick: false,
 }).then( result => {
@@ -22,17 +17,15 @@ Swal.fire({
 
 chatBox.addEventListener("keyup", (event) => {
     if(event.key === "Enter") {
+        //Verifico que el texto sea mayor a cero caracteres antes de enviarlo al chat
         if(chatBox.value.trim().length > 0) {
-            //trim nos permite sacar los espacios en blanco del principio y del final de un string. 
-            //Si el mensaje tiene más de 0 caracteres, lo enviamos al servidor. 
             socket.emit("message", {user: user, message: chatBox.value}); 
             chatBox.value = "";
         }
     }
 })
 
-//Listener de Mensajes: 
-
+//Listener de Mensajes
 socket.on("message", data => {
     let log = document.getElementById("messagesLogs");
     let messages = "";

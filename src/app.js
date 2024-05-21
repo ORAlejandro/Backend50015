@@ -8,6 +8,8 @@ const cors = require("cors");
 const path = require('path');
 const PUERTO = 8080;
 const addLogger = require("./utils/logger.js");
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUiExpress = require("swagger-ui-express");
 require("./database.js");
 
 //Importaciones de rutas
@@ -53,6 +55,21 @@ app.get("/loggertest", (req, res) => {
     req.logger.debug("Mensaje debug");
     res.send("Ruta para testear Winston");
 })
+
+//Objeto de configuracion Swagger
+const swaggerOptions = {
+    definition: {
+        openapi: "3.0.1",
+        info: {
+            title: "Documentacion de la APP TodoRopa",
+            description: "API orientada al ecommerce TodoRopa"
+        }
+    },
+    apis: ["./src/docs/**/*.yaml"]
+}
+
+const specs = swaggerJSDoc(swaggerOptions);
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 const httpServer = app.listen(PUERTO, () => {
     console.log(`Success: Servidor escuchando en http://localhost:${PUERTO}`);

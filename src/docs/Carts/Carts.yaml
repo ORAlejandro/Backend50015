@@ -1,9 +1,10 @@
 tags:
   - name: Users
+    description: Operaciones relacionadas con usuarios
 paths:
   /register:
     post:
-      summary: Register a new user
+      summary: Registra un nuevo usuario
       tags:
         - Users
       requestBody:
@@ -15,27 +16,27 @@ paths:
               properties:
                 first_name:
                   type: string
-                  description: User's first name
-                  example: John
+                  description: Nombre del usuario
+                  example: Fernando
                 last_name:
                   type: string
-                  description: User's last name
-                  example: Doe
+                  description: Apellido del usuario
+                  example: Cantero
                 email:
                   type: string
-                  description: User's email address
-                  example: user@example.com
+                  description: Email del usuario
+                  example: usuario@ejemplo.com
                 password:
                   type: string
-                  description: User's password
-                  example: password123
+                  description: Password del usuario
+                  example: password1234
                 age:
                   type: integer
-                  description: User's age
-                  example: 25
+                  description: Edad del usuario
+                  example: 30
       responses:
-        200:
-          description: User created successfully
+        '200':
+          description: Usuario creado correctamente
           content:
             application/json:
               schema:
@@ -44,9 +45,9 @@ paths:
                   message:
                     type: string
                     description: Success message
-                    example: User created successfully
-        400:
-          description: User already exists or invalid data
+                    example: Usuario creado correctamente
+        '400':
+          description: Usuario existente o datos ingresados invalidos
           content:
             application/json:
               schema:
@@ -55,8 +56,8 @@ paths:
                   message:
                     type: string
                     description: Error message
-                    example: El usuario ya existe  # Adapt message based on your implementation
-        500:
+                    example: El usuario ya existe
+        '500':
           description: Internal server error
           content:
             application/json:
@@ -66,11 +67,11 @@ paths:
                   message:
                     type: string
                     description: Error message
-                    example: Error interno del servidor  # Adapt message based on your implementation
+                    example: Error interno del servidor
 
   /login:
     post:
-      summary: Login a user
+      summary: Logea un usuario
       tags:
         - Users
       requestBody:
@@ -82,20 +83,20 @@ paths:
               properties:
                 email:
                   type: string
-                  description: User's email address
-                  example: user@example.com
+                  description: Email del usuario
+                  example: usuario@ejemplo.com
                 password:
                   type: string
-                  description: User's password
-                  example: password123
+                  description: Password del usuario
+                  example: password1234
       responses:
-        200:
-          description: User logged in successfully
+        '200':
+          description: Usuario logeado correctamente
           headers:
             Set-Cookie:
-              description: Sets a cookie with the JWT token
-        401:
-          description: Invalid credentials
+              description: Establece una cookie con el token JWT
+        '401':
+          description: Credenciales invalidas
           content:
             application/json:
               schema:
@@ -104,8 +105,8 @@ paths:
                   message:
                     type: string
                     description: Error message
-                    example: Usuario no válido  # Adapt message based on your implementation
-        500:
+                    example: Usuario no válido
+        '500':
           description: Internal server error
           content:
             application/json:
@@ -115,24 +116,23 @@ paths:
                   message:
                     type: string
                     description: Error message
-                    example: Error interno del servidor  # Adapt message based on your implementation
+                    example: Error interno del servidor
 
   /profile:
     get:
-      summary: Get user profile information
+      summary: Obtiene la informacion del perfil del usuario
       tags:
         - Users
       security:
-        - jwt: []  # Assuming you use JWT authentication for profile access
+        - jwt: []
       responses:
-        200:
-          description: User profile information
+        '200':
+          description: Informacion del perfil del usuario
           content:
             application/json:
               schema:
                 type: object
-                # Add properties for user profile information (first_name, last_name, etc.)
-        500:
+        '500':
           description: Internal server error
           content:
             application/json:
@@ -142,27 +142,95 @@ paths:
                   message:
                     type: string
                     description: Error message
-                    example: Error interno del servidor  # Adapt message based on your implementation
+                    example: Error interno del servidor
 
   /logout:
     post:
-      summary: Log out user
+      summary: Deslogea al usuario
       tags:
         - Users
       responses:
-        200:
-          description: User logged out successfully
+        '200':
+          description: Usuario deslogeado correctamente
 
   /admin:
     get:
-      summary: Access admin panel (protected route)
+      summary: Acceso al panel del admin (ruta protegida)
       tags:
         - Users
       security:
-        - jwt: []  # Assuming you use JWT authentication for admin access
+        - jwt: []
       responses:
-        200:
-          description: Admin panel content
-        403:
-          description: Forbidden access (user is not admin)
-          
+        '200':
+          description: Panel del admin
+        '403':
+          description: Acceso prohibido para usuarios que no sean admin
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del producto
+        nombre:
+          type: string
+          description: Nombre del producto
+        descripcion:
+          type: string
+          description: Descripción del producto
+        precio:
+          type: number
+          description: Precio del producto
+        stock:
+          type: integer
+          description: Cantidad en stock del producto
+      required:
+        - nombre
+        - precio
+        - stock
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del usuario
+        first_name:
+          type: string
+          description: Nombre del usuario
+        last_name:
+          type: string
+          description: Apellido del usuario
+        email:
+          type: string
+          description: Email del usuario
+        password:
+          type: string
+          description: Password del usuario
+        age:
+          type: integer
+          description: Edad del usuario
+        cart:
+          type: string
+          description: ID del carrito asociado
+        role:
+          type: string
+          description: Rol del usuario
+          enum: ["admin", "usuario", "premium"]
+        resetToken:
+          type: object
+          properties:
+            token:
+              type: string
+              description: Token de reseteo de contraseña
+            expiresAt:
+              type: string
+              format: date-time
+              description: Fecha de expiración del token de reseteo
+      required:
+        - first_name
+        - last_name
+        - email
+        - age
+        - role

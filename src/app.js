@@ -62,7 +62,7 @@ const swaggerOptions = {
         openapi: "3.0.1",
         info: {
             title: "Documentacion de la APP TodoRopa",
-            description: "API orientada al ecommerce TodoRopa"
+            description: "API orientada al funcionamiento del E-Commerce TodoRopa"
         }
     },
     apis: ["./src/docs/**/*.yaml"]

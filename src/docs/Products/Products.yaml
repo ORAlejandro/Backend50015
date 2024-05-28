@@ -1,8 +1,12 @@
 tags:
   - name: Products
+    description: Operaciones relacionadas con productos
+
 paths:
-  /:
+  /api/products/:
     get:
+      tags:
+        - Products
       summary: Obtener lista de productos
       parameters:
         - name: limit
@@ -27,7 +31,7 @@ paths:
             type: string
         - name: query
           in: query
-          description: Consulta para filtrar productos
+          description: Query para filtrar productos
           required: false
           schema:
             type: string
@@ -43,7 +47,9 @@ paths:
         '500':
           description: Error interno del servidor
     post:
-      summary: Añadir un nuevo producto
+      tags:
+        - Products
+      summary: Agregar un nuevo producto
       requestBody:
         required: true
         content:
@@ -59,8 +65,10 @@ paths:
                 $ref: '#/components/schemas/Product'
         '500':
           description: Error interno del servidor
-  /{pid}:
+  /api/products/{pid}:
     get:
+      tags:
+        - Products
       summary: Obtener producto por ID
       parameters:
         - name: pid
@@ -80,6 +88,8 @@ paths:
         '500':
           description: Error interno del servidor
     put:
+      tags:
+        - Products
       summary: Actualizar producto por ID
       parameters:
         - name: pid
@@ -101,8 +111,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Product'
         '500':
-          description: Error interno del servidor
+          description: No se pudo actualizar el producto
     delete:
+      tags:
+        - Products
       summary: Eliminar producto por ID
       parameters:
         - name: pid
@@ -114,7 +126,8 @@ paths:
         '200':
           description: Producto eliminado
         '500':
-          description: Error interno del servidor
+          description: No se pudo eliminar el producto
+
 components:
   schemas:
     Product:
@@ -128,7 +141,7 @@ components:
           description: Nombre del producto
         descripcion:
           type: string
-          description: Descripción del producto
+          description: Descripcion del producto
         precio:
           type: number
           description: Precio del producto

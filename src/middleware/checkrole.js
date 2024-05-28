@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const checkUserRole = (allowedRoles) => (req, res, next) => {
     const token = req.cookies.coderCookieToken;
 
     if (token) {
-        jwt.verify(token, 'coderhouse', (err, decoded) => {
+        jwt.verify(token, "coderhouse", (err, decoded) => {
             if (err) {
                 res.status(403).send("Acceso restringido: Token invalido");
             } else {

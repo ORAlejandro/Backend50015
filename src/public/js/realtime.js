@@ -39,7 +39,6 @@ const renderProductos = (productos) => {
     })
 }
 
-
 const eliminarProducto = (id) =>  {
     socket.emit("eliminarProducto", id);
 }

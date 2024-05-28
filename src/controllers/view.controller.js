@@ -27,9 +27,7 @@ class ViewsController {
                 return { id: _id, ...rest }; // Agregar el ID al objeto
             });
 
-
             const cartId = req.user.cart.toString();
-            //console.log(cartId);
 
             res.render("products", {
                 productos: nuevoArray,
@@ -45,7 +43,7 @@ class ViewsController {
         } catch (error) {
             console.error("Error al obtener productos", error);
             res.status(500).json({
-                status: 'error',
+                status: "Error",
                 error: "Error interno del servidor"
             });
         }
@@ -57,10 +55,9 @@ class ViewsController {
             const carrito = await cartRepository.obtenerProductosDeCarrito(cartId);
 
             if (!carrito) {
-                console.log("No existe ese carrito con el id");
+                console.log("Ningun carrito coincide con ese ID");
                 return res.status(404).json({ error: "Carrito no encontrado" });
             }
-
 
             let totalCompra = 0;
 
@@ -69,7 +66,6 @@ class ViewsController {
                 const quantity = item.quantity;
                 const totalPrice = product.price * quantity;
 
-                
                 totalCompra += totalPrice;
 
                 return {
@@ -94,23 +90,12 @@ class ViewsController {
         res.render("register");
     }
 
-    /*
-    async renderRealTimeProducts(req, res) {
-        try {
-            res.render("realtimeproducts");
-        } catch (error) {
-            console.log("error en la vista real time", error);
-            res.status(500).json({ error: "Error interno del servidor" });
-        }
-    }
-    */
-
     async renderRealTimeProducts(req, res) {
         const usuario = req.user; 
         try {
             res.render("realtimeproducts", {role: usuario.role, email: usuario.email});
         } catch (error) {
-            console.log("error en la vista real time", error);
+            console.log("Error al intentar renderizar realtimeproducts", error);
             res.status(500).json({ error: "Error interno del servidor" });
         }
     }

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ticketSchema = new mongoose.Schema({
     code: {
@@ -17,11 +17,11 @@ const ticketSchema = new mongoose.Schema({
     },
     purchaser: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         required: true
     }
 });
 
-const TicketModel = mongoose.model('Ticket', ticketSchema);
+const TicketModel = mongoose.model("Ticket", ticketSchema);
 
 module.exports = TicketModel;

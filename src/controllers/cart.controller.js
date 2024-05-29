@@ -7,10 +7,10 @@ const productRepository = new ProductRepository();
 const { generateUniqueCode, calcularTotal } = require("../utils/cartutils.js");
 
 class CartController {
-    async nuevoCarrito(req, res) {
+    async newCart(req, res) {
         try {
-            const nuevoCarrito = await cartRepository.crearCarrito();
-            res.json(nuevoCarrito);
+            const newCart = await cartRepository.crearCarrito();
+            res.json({ status: "success", message: "Carrito creado correctamente", newCart });
         } catch (error) {
             req.logger.error("Error al crear un nuevo carrito: ", error);
             res.status(500).json({ status: "error", message: "Error al crear un nuevo carrito", details: error.message });

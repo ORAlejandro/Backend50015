@@ -6,7 +6,7 @@ const cartController = new CartController();
 
 router.use(authMiddleware);
 
-router.post("/", cartController.nuevoCarrito);
+router.post("/", cartController.newCart);
 router.get("/:cid", cartController.obtenerProductosDeCarrito);
 router.post("/:cid/product/:pid", cartController.agregarProductoEnCarrito);
 router.delete("/:cid/product/:pid", cartController.eliminarProductoDeCarrito);

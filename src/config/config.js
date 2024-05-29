@@ -1,6 +1,5 @@
 const dotenv = require("dotenv");
 const program = require("../utils/commander.js");
-
 const {mode} = program.opts(); 
 
 dotenv.config({

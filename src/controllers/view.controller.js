@@ -6,29 +6,20 @@ class ViewsController {
     async renderProducts(req, res) {
         try {
             const { page = 1, limit = 3 } = req.query;
-
             const skip = (page - 1) * limit;
-
             const productos = await ProductModel
                 .find()
                 .skip(skip)
                 .limit(limit);
-
             const totalProducts = await ProductModel.countDocuments();
-
             const totalPages = Math.ceil(totalProducts / limit);
-
             const hasPrevPage = page > 1;
             const hasNextPage = page < totalPages;
-
-
             const nuevoArray = productos.map(producto => {
                 const { _id, ...rest } = producto.toObject();
-                return { id: _id, ...rest }; // Agregar el ID al objeto
+                return { id: _id, ...rest }; // Agregar el ID al objeto (Observacion del profesor)
             });
-
             const cartId = req.user.cart.toString();
-
             res.render("products", {
                 productos: nuevoArray,
                 hasPrevPage,
@@ -39,13 +30,9 @@ class ViewsController {
                 totalPages,
                 cartId
             });
-
         } catch (error) {
-            console.error("Error al obtener productos", error);
-            res.status(500).json({
-                status: "Error",
-                error: "Error interno del servidor"
-            });
+            req.logger.error("Error al renderizar los productos: ", error);
+            res.status(500).json({ status: "error", message: "error al renderizar los productos", details: error.message });
         }
     }
 
@@ -53,32 +40,25 @@ class ViewsController {
         const cartId = req.params.cid;
         try {
             const carrito = await cartRepository.obtenerProductosDeCarrito(cartId);
-
             if (!carrito) {
-                console.log("Ningun carrito coincide con ese ID");
-                return res.status(404).json({ error: "Carrito no encontrado" });
+                return res.status(404).json({ status: "error", message: "Carrito no encontrado" });
             }
-
             let totalCompra = 0;
-
             const productosEnCarrito = carrito.products.map(item => {
                 const product = item.product.toObject();
                 const quantity = item.quantity;
                 const totalPrice = product.price * quantity;
-
                 totalCompra += totalPrice;
-
                 return {
                     product: { ...product, totalPrice },
                     quantity,
                     cartId
                 };
             });
-
             res.render("carts", { productos: productosEnCarrito, totalCompra, cartId });
         } catch (error) {
-            console.error("Error al obtener el carrito", error);
-            res.status(500).json({ error: "Error interno del servidor" });
+            req.logger.error("Error al renderizar el carrito: ", error);
+            res.status(500).json({ status: "error", message: "Error interno del servidor", details: error.message });
         }
     }
 
@@ -95,8 +75,8 @@ class ViewsController {
         try {
             res.render("realtimeproducts", {role: usuario.role, email: usuario.email});
         } catch (error) {
-            console.log("Error al intentar renderizar realtimeproducts", error);
-            res.status(500).json({ error: "Error interno del servidor" });
+            req.logger.error("Error al intentar renderizar realtimeproducts: ", error);
+            res.status(500).json({ status: "error", message: "Error interno del servidor", details: error.message });
         }
     }
 

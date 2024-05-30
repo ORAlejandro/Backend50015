@@ -7,7 +7,7 @@ class CartRepository {
             await nuevoCarrito.save();
             return nuevoCarrito;
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al crear el carrito");
         }
     }
 
@@ -15,12 +15,12 @@ class CartRepository {
         try {
             const carrito = await CartModel.findById(idCarrito);
             if (!carrito) {
-                console.log("No existe ese carrito con el id");
+                console.log("Carrito inexistente o id invalido");
                 return null;
             }
             return carrito;
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al obtener productos del carrito");
         }
     }
 
@@ -28,7 +28,6 @@ class CartRepository {
         try {
             const carrito = await this.obtenerProductosDeCarrito(cartId);
             const existeProducto = carrito.products.find(item => item.product._id.toString() === productId);
-
             if (existeProducto) {
                 existeProducto.quantity += quantity;
             } else {
@@ -38,7 +37,7 @@ class CartRepository {
             await carrito.save();
             return carrito;
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al agregar producto");
         }
     }
 
@@ -46,58 +45,46 @@ class CartRepository {
         try {
             const cart = await CartModel.findById(cartId);
             if (!cart) {
-                throw new Error('Carrito no encontrado');
+                throw new Error("Carrito inexistente o id invalido");
             }
             cart.products = cart.products.filter(item => item.product._id.toString() !== productId);
             await cart.save();
             return cart;
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al eliminar un producto");
         }
     }
 
     async actualizarProductosEnCarrito(cartId, updatedProducts) {
         try {
             const cart = await CartModel.findById(cartId);
-
             if (!cart) {
-                throw new Error('Carrito no encontrado');
+                throw new Error("Carrito inexistente o id invalido");
             }
-
             cart.products = updatedProducts;
-
-            cart.markModified('products');
+            cart.markModified("products");
             await cart.save();
             return cart;
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al actualizar los productos en carrito");
         }
     }
 
     async actualizarCantidadesEnCarrito(cartId, productId, newQuantity) {
         try {
             const cart = await CartModel.findById(cartId);
-
             if (!cart) {
-                
-                throw new Error('Carrito no encontrado');
+                throw new Error("Carrito inexistente o id invalido");
             }
-            
-            
             const productIndex = cart.products.findIndex(item => item._id.toString() === productId);
-        
             if (productIndex !== -1) {
                 cart.products[productIndex].quantity = newQuantity;
-
-
-                cart.markModified('products');
-
+                cart.markModified("products");
                 await cart.save();
                 return cart;
             } else {
-                throw new Error('Producto no encontrado en el carrito');
+                throw new Error("Producto no encontrado en el carrito");
             }
-
         } catch (error) {
             throw new Error("Error al actualizar las cantidades");
         }
@@ -110,15 +97,12 @@ class CartRepository {
                 { products: [] },
                 { new: true }
             );
-
             if (!cart) {
-                throw new Error('Carrito no encontrado');
+                throw new Error("Carrito inexistente o id invalido");
             }
-
             return cart;
-
         } catch (error) {
-            throw new Error("Error");
+            throw new Error("Error al vaciar el carrito");
         }
     }
 }

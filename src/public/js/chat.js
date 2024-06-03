@@ -17,7 +17,7 @@ Swal.fire({
 
 chatBox.addEventListener("keyup", (event) => {
     if(event.key === "Enter") {
-        //Verifico que el texto sea mayor a cero caracteres antes de enviarlo al chat
+        //Verificamos que el texto sea mayor a cero caracteres antes de enviarlo al chat
         if(chatBox.value.trim().length > 0) {
             socket.emit("message", {user: user, message: chatBox.value}); 
             chatBox.value = "";

@@ -3,24 +3,24 @@ const CartModel = require("../models/cart.model.js");
 class CartRepository {
     async crearCarrito() {
         try {
-            const nuevoCarrito = new CartModel({ products: [] });
-            await nuevoCarrito.save();
-            return nuevoCarrito;
+            const newCart = new CartModel({ products: [] });
+            await newCart.save();
+            return newCart;
         } catch (error) {
-            throw new Error("Error al crear el carrito");
+            throw new Error("Failed: Error al crear el carrito");
         }
     }
 
     async obtenerProductosDeCarrito(idCarrito) {
         try {
-            const carrito = await CartModel.findById(idCarrito);
-            if (!carrito) {
-                console.log("Carrito inexistente o id invalido");
+            const cart = await CartModel.findById(idCarrito);
+            if (!cart) {
+                console.log("Failed: Carrito inexistente o id invalido");
                 return null;
             }
-            return carrito;
+            return cart;
         } catch (error) {
-            throw new Error("Error al obtener productos del carrito");
+            throw new Error("Failed: Error al obtener productos del carrito");
         }
     }
 
@@ -37,7 +37,7 @@ class CartRepository {
             await carrito.save();
             return carrito;
         } catch (error) {
-            throw new Error("Error al agregar producto");
+            throw new Error("Failed: Error al agregar producto");
         }
     }
 
@@ -45,13 +45,13 @@ class CartRepository {
         try {
             const cart = await CartModel.findById(cartId);
             if (!cart) {
-                throw new Error("Carrito inexistente o id invalido");
+                throw new Error("Failed: Carrito inexistente o id invalido");
             }
             cart.products = cart.products.filter(item => item.product._id.toString() !== productId);
             await cart.save();
             return cart;
         } catch (error) {
-            throw new Error("Error al eliminar un producto");
+            throw new Error("Failed: Error al eliminar un producto");
         }
     }
 
@@ -59,14 +59,14 @@ class CartRepository {
         try {
             const cart = await CartModel.findById(cartId);
             if (!cart) {
-                throw new Error("Carrito inexistente o id invalido");
+                throw new Error("Failed: Carrito inexistente o id invalido");
             }
             cart.products = updatedProducts;
             cart.markModified("products");
             await cart.save();
             return cart;
         } catch (error) {
-            throw new Error("Error al actualizar los productos en carrito");
+            throw new Error("Failed: Error al actualizar los productos en carrito");
         }
     }
 
@@ -74,7 +74,7 @@ class CartRepository {
         try {
             const cart = await CartModel.findById(cartId);
             if (!cart) {
-                throw new Error("Carrito inexistente o id invalido");
+                throw new Error("Failed: Carrito inexistente o id invalido");
             }
             const productIndex = cart.products.findIndex(item => item._id.toString() === productId);
             if (productIndex !== -1) {
@@ -83,10 +83,10 @@ class CartRepository {
                 await cart.save();
                 return cart;
             } else {
-                throw new Error("Producto no encontrado en el carrito");
+                throw new Error("Failed: Producto no encontrado en el carrito");
             }
         } catch (error) {
-            throw new Error("Error al actualizar las cantidades");
+            throw new Error("Failed: Error al actualizar las cantidades");
         }
     }
 
@@ -98,11 +98,11 @@ class CartRepository {
                 { new: true }
             );
             if (!cart) {
-                throw new Error("Carrito inexistente o id invalido");
+                throw new Error("Failed: Carrito inexistente o id invalido");
             }
             return cart;
         } catch (error) {
-            throw new Error("Error al vaciar el carrito");
+            throw new Error("Failed: Error al vaciar el carrito");
         }
     }
 }

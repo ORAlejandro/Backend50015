@@ -7,6 +7,9 @@
         <div>
             <div class="productsFlexCard">
                 <h3 class="productsh3Title">{{title}}</h3>
+                <div class="productImgContainer">
+                    <img class="productImgMain" src={{img}} alt="">
+                </div>
                 <p class="productsFlexP">{{description}}</p>
                 <p class="productsFlexP">Precio: ${{price}}</p>
                 <form action="/api/carts/{{../cartId}}/product/{{id}}" method="POST">

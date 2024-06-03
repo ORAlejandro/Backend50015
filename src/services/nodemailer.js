@@ -12,8 +12,6 @@ class EmailManager {
         });
     }
 
-    /* FUNCION PARA EL CHECKOUT, ESTA ES LA BASE.
-    //Aun no implementada
     async sendPurchaseMail(email, first_name, ticket) {
         try {
             const mailOptions = {
@@ -31,7 +29,6 @@ class EmailManager {
             console.error("Error el intentar enviar el mail de compra: ", error);
         }
     }
-    */
 
     async sendRestorePasswordMail(email, first_name, token) {
         try {

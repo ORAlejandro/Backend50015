@@ -418,6 +418,7 @@ header {
   cursor: pointer;
   margin-top: 0.7rem;
   margin-bottom: 1rem;
+  margin-left: 0.3rem;
   padding: 0.2rem 1.7rem;
   background-color: rgb(7, 148, 5);
   color: whitesmoke;
@@ -426,6 +427,13 @@ header {
 
 .cartsFinalizar:hover {
   background-color: rgb(24, 179, 21);
+}
+
+.cartsDivTwoBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 /*///////// REALTIMEPRODUCTS /////////*/

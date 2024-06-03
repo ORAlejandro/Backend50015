@@ -5,6 +5,8 @@ const cartRepository = new CartRepository();
 const ProductRepository = require("../repositories/product.repository.js");
 const productRepository = new ProductRepository();
 const { generateUniqueCode, calcularTotal } = require("../utils/cartutils.js");
+const EmailManager = require("../services/nodemailer.js");
+const emailManager = new EmailManager;
 
 class CartController {
     async newCart(req, res) {
@@ -129,7 +131,13 @@ class CartController {
             cart.products = cart.products.filter(item => productosNoDisponibles.some(productId => productId.equals(item.product)));
             // Guardamos el carrito actualizado en la base de datos
             await cart.save();
-            res.status(200).json({ message: "Los siguientes productos no se facturaron por falta de stock", productosNoDisponibles });
+            await emailManager.sendPurchaseMail(userWithCart.email, userWithCart.first_name, ticket._id);
+            res.render("checkout", {
+                client: userWithCart.first_name,
+                email: userWithCart.email,
+                numTicket: ticket._id
+            });
+            //res.status(200).json({ message: "Los siguientes productos no se facturaron por falta de stock", productosNoDisponibles });
         } catch (error) {
             req.logger.error("Error al procesar la compra: ", error);
             res.status(500).json({ status: "error", message: "Error al procesar la compra", details: error.message });

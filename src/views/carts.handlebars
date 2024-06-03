@@ -15,7 +15,7 @@
     <h4 class="cartsh4Total">Monto Total: ${{totalCompra}}</h4>
     <p class="cartsAgregarMas">¿Te falto agregar algo? <a class="cartsVolverTienda" href="/products">Volver a la
             Tienda</a></p>
-    <div>
+    <div class="cartsDivTwoBtn">
         <button class="cartsBtnEliminar" onclick="vaciarCarrito('{{cartId}}')">Vaciar Carrito</button>
         <form method="post" action="/api/carts/{{cartId}}/purchase">
             <button type="submit" class="cartsFinalizar">Finalizar Compra</button>

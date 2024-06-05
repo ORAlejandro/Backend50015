@@ -26,18 +26,31 @@ const userSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+
     cart: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cart"
     },
+
     role: {
         type: String,
         enum: ["admin", "usuario", "premium"],
         default: "usuario"
     },
+
     resetToken: {
         token: String,
         expiresAt: Date
+    },
+
+    documents: [{
+        name: String,
+        reference: String
+    }],
+
+    last_connection: {
+        type: Date,
+        default: Date.now
     }
 });
 

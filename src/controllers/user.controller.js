@@ -180,16 +180,22 @@ class UserController {
     async switchRolePremium(req, res) {
         try {
             const { uid } = req.params;
-            const user = await UserModel.findById(uid);
-            if(!user) {
-                return res.status(404).json({ status: "error", message: "Usuario inexistente" });
+            const user = await userRepository.findById(uid);
+            if (!user) {
+                return res.status(404).json({ message: "Usuario inexistente" });
+            }
+            const requiredDocuments = ["Documento de Identificacion", "Comprobante monotributo/RI", "Comprobante de cuenta bancaria"];
+            const userDocuments = user.documents.map(doc => doc.name);
+            const hasRequiredDocuments = requiredDocuments.every(doc => userDocuments.includes(doc));
+            if (!hasRequiredDocuments) {
+                return res.status(400).json({ message: "La siguiente documentacion es requerida: Documento de Identificacion, Comprobante monotributo/RI, Comprobante de cuenta bancaria" });
             }
             const newRole = user.role === "usuario" ? "premium" : "usuario";
-            const updated = await UserModel.findByIdAndUpdate(uid, { role: newRole }, { new: true });
-            res.json({ status: "success", updated });
+            const updated = await userRepository.updateUserRole(uid, newRole);
+            res.json(updated);
         } catch (error) {
             req.logger.error("Error en el switch de roles: ", error);
-            res.status(500).json({ status: "error", message: "error en el switch de roles", details: error.message });
+            res.status(500).json({ status: "error", message: "Error en el switch de roles", details: error.message });
         }
     }
 }

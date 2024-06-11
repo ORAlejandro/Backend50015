@@ -1,5 +1,9 @@
 const ProductRepository = require("../repositories/product.repository.js");
 const productRepository = new ProductRepository();
+const UserRepository = require("../repositories/user.repository.js");
+const userRepository = new UserRepository;
+const EmailManager = require("../services/nodemailer.js");
+const emailManager = new EmailManager;
 
 class ProductController {
     async addProduct(req, res) {
@@ -53,6 +57,19 @@ class ProductController {
     async deleteProduct(req, res) {
         const id = req.params.pid;
         try {
+            const producto = await productRepository.obtenerProductoPorId(id);
+            if (!producto) {
+                return res.status(404).json({ status: "error", message: "Producto no encontrado" });
+            }
+            const usuario = await userRepository.findById(producto.owner);
+            if (usuario && usuario.role === "premium") {
+                await emailManager.sendEmail({
+                    to: usuario.email,
+                    subject: "Producto eliminado",
+                    html: `<p>Estimado ${usuario.first_name},</p>
+                           <p>Le informamos que su producto "${producto.name}" ha sido eliminado del catálogo.</p>`
+                });
+            }
             let responseDel = await productRepository.eliminarProducto(id);
             res.json({ status: "success", message: "Producto eliminado correctamente", responseDel });
         } catch (error) {

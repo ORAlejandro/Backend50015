@@ -51,5 +51,7 @@ router.post("/:uid/documents", uploadMulter.fields([
             res.status(500).json({ status: "error", message: "Error router multer", details: error.message });
         }
     })
+router.get("/", userController.getAllUsers);
+router.delete("/", userController.deleteInactiveUsers);
 
 module.exports = router;

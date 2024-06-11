@@ -198,6 +198,32 @@ class UserController {
             res.status(500).json({ status: "error", message: "Error en el switch de roles", details: error.message });
         }
     }
+
+    async getAllUsers(req, res) {
+        try {
+            const users = await UserModel.find({}, "first_name last_name email role");
+            res.status(200).json(users);
+        } catch (error) {
+            req.logger.error("Error al obtener usuarios: ", error);
+            res.status(500).json({ status: "error", message: "Error al obtener usuarios", details: error.message });
+        }
+    }
+
+    async deleteInactiveUsers(req, res) {
+        try {
+            const twoDaysAgo = new Date();
+            twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+            const inactiveUsers = await UserModel.find({ lastConnection: { $lt: twoDaysAgo } });
+            for (const user of inactiveUsers) {
+                await emailManager.sendDeletionMail(user.email, user.first_name);
+                await UserModel.deleteOne({ _id: user._id });
+            }
+            res.status(200).json({ status: "success", message: "Usuarios inactivos eliminados" });
+        } catch (error) {
+            req.logger.error("Error al eliminar usuarios inactivos: ", error);
+            res.status(500).json({ status: "error", message: "Error al eliminar usuarios inactivos", details: error.message });
+        }
+    }
 }
 
 module.exports = UserController;

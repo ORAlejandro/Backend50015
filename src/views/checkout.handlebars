@@ -1,9 +1,10 @@
-<div>
-    <h1>Checkout</h1>
-    <p>¡Gracias por tu compra <span>{{client}}</span>! El número de orden es: <span> {{numTicket}} </span> </p>
-    <p> Te enviaremos un e-mail a <span> {{email}} </span> con toda la información de tu orden </p>
-     <div>
-        <a href="/products">Tienda</a>
-        <a href="/api/users/profile">Mi Perfil</a>
+<main class="checkoutMain">
+    <div class="checkoutFlex">
+        <h1>Checkout</h1>
+        <p>Tu compra fue realizada con exito. Muchas gracias <span class="profileFullName">{{client}}</span>.</p>
+        <p>Este es tu numero de orden <span class="checkoutNumTicket"> {{numTicket}} </span></p>
+        <p>Toda la informacion sera enviada a: <span class="checkoutNumTicket"> {{email}} </span></p>
+        <p>Ir a <a class="registerLogin" href="/api/users/profile">Mi Perfil</a></p>
+        <p>Volver a la <a class="registerLogin" href="/products">Tienda</a></p>
     </div>
-</div>
+</main>

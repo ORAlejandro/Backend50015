@@ -338,6 +338,17 @@
   object-position: center;
 }
 
+.productsTitleFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.productsCartLogo {
+  width: 44px;
+  height: 44px;
+}
+
 /*///////// HEADERS /////////*/
 
 header {
@@ -497,4 +508,35 @@ header {
 
 .restoreEmail {
   text-align: center !important;
+}
+
+/*///////// CHECKOUT /////////*/
+
+.checkoutMain {
+  max-width: 50%;
+  margin: 1.5rem auto;
+}
+
+.checkoutFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  -moz-box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+  box-shadow: 0px 0px 43px -11px rgba(123, 119, 135, 1);
+}
+
+.checkoutFlex p {
+  margin-bottom: 0.8rem;
+}
+
+.checkoutFlex h1 {
+  margin-bottom: 1.1rem;
+}
+
+.checkoutNumTicket {
+  color: rebeccapurple;
+  font-weight: 500;
 }

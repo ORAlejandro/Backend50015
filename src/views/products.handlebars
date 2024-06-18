@@ -1,5 +1,8 @@
-<div>
-    <h2 class="productsh2">Listado completo de Productos</h2>
+<div class="productsTitleFlex">
+    <h2 class="productsh2">Catalogo de Productos</h2>
+    <a href="/carts/{{cartId}}">
+        <img class="productsCartLogo" src="./images/cart-logo.png" alt="logo del carrito">
+    </a>
 </div>
 <div>
     <section class="productsFlexSection">
@@ -23,12 +26,12 @@
 <div>
     <div class="productsFlexPages">
         <div>
-        {{#if hasPrevPage}}
-        <a class="productsA" href="/products?page={{prevPage}}">⭠ Anterior</a>
-        {{/if}}
-        {{#if hasNextPage}}
-        <a class="productsA" href="/products?page={{nextPage}}">Siguiente ⭢</a>
-        {{/if}}
+            {{#if hasPrevPage}}
+            <a class="productsA" href="/products?page={{prevPage}}">⭠ Anterior</a>
+            {{/if}}
+            {{#if hasNextPage}}
+            <a class="productsA" href="/products?page={{nextPage}}">Siguiente ⭢</a>
+            {{/if}}
         </div>
         <p class="productsFlexP">Pagina {{currentPage}} de {{totalPages}} </p>
         <p class="productsFlexP">Modificar <a class="productsA" href="/carts/{{cartId}}">Mi Carrito</a></p>

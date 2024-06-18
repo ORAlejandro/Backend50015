@@ -40,7 +40,8 @@ class CartController {
         try {
             await cartRepository.agregarProducto(cartId, productId, quantity);
             const carritoID = (req.user.cart).toString();
-            res.redirect(`/carts/${carritoID}`)
+            res.redirect(`/products`);
+            //res.redirect(`/carts/${carritoID}`);
         } catch (error) {
             req.logger.error("Error al agregar producto al carrito: ", error);
             res.status(500).json({ status: "error", message: "Error al agregar producto al carrito", details: error.message });

@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const ViewsController = require("../controllers/view.controller.js");
 const viewsController = new ViewsController();
-const AdminController = require("../controllers/admin.controller.js");
-const adminController = new AdminController;
 const checkUserRole = require("../middleware/checkrole.js");
 const passport = require("passport");
 
@@ -18,6 +16,5 @@ router.get("/reset-password", viewsController.renderResetPassword);
 router.get("/password", viewsController.renderCambioPassword);
 router.get("/confirmacion-envio", viewsController.renderConfirmacion);
 router.get("/panel-premium", viewsController.renderPremium);
-router.get("/admin/users", passport.authenticate("jwt", { session: false }), checkUserRole(["admin"]), adminController.renderAdminUsers);
 
 module.exports = router;

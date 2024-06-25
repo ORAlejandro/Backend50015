@@ -12,7 +12,7 @@ const swaggerUiExpress = require("swagger-ui-express");
 const dotenv = require("dotenv");
 dotenv.config();
 require("./database.js");
-const PUERTO = process.env.PUERTO || 8080;
+const PORT = process.env.PORT || 3000;
 
 //Importaciones de rutas
 const productsRouter = require("./routes/products.router.js");
@@ -80,8 +80,8 @@ const swaggerOptions = {
 const specs = swaggerJSDoc(swaggerOptions);
 app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
-const httpServer = app.listen(PUERTO, () => {
-    console.log(`Success: Servidor escuchando en http://localhost:${PUERTO}`);
+const httpServer = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Success: Servidor escuchando en http://localhost:${PORT}`);
 });
 
 ///Websockets

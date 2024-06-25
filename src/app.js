@@ -12,7 +12,7 @@ const swaggerUiExpress = require("swagger-ui-express");
 const dotenv = require("dotenv");
 dotenv.config();
 require("./database.js");
-const PUERTO = process.env.PUERTO;
+const PUERTO = process.env.PUERTO || 8080;
 
 //Importaciones de rutas
 const productsRouter = require("./routes/products.router.js");

@@ -6,11 +6,13 @@ const passport = require("passport");
 const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require('path');
-const PUERTO = 8080;
 const addLogger = require("./utils/logger.js");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUiExpress = require("swagger-ui-express");
+const dotenv = require("dotenv");
+dotenv.config();
 require("./database.js");
+const PUERTO = process.env.PUERTO;
 
 //Importaciones de rutas
 const productsRouter = require("./routes/products.router.js");
@@ -44,7 +46,6 @@ const hbs = exphbs.create({
 
 //Handlebars
 app.engine("handlebars", hbs.engine);
-//app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
